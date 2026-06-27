@@ -971,7 +971,7 @@
             <label class="variant ${checked ? "is-checked" : ""}">
               <input type="checkbox" data-slug="${escapeHtml(sprite.slug)}" data-variant="${escapeHtml(variant)}" ${checked} />
               <span class="variant-name">${escapeHtml(variant)}</span>
-              <span class="variant-state"><span class="variant-x">✕</span><span class="variant-text">${checked ? "GOT IT!" : "Get!"}</span></span>
+              <span class="variant-state"><span class="variant-x">✕</span><span class="variant-text">Get!</span></span>
             </label>
           `;
         }).join("");
@@ -1004,8 +1004,6 @@
           const label = box.closest(".variant");
           if (label) {
             label.classList.toggle("is-checked", box.checked);
-            const stateText = label.querySelector(".variant-text");
-            if (stateText) stateText.textContent = box.checked ? "GOT IT!" : "Get!";
           }
           const totalLeft = Math.max(countTasks() - countCompleted(), 0);
           const spriteName = sprites.find((sprite) => sprite.slug === box.dataset.slug)?.name || box.dataset.variant;
