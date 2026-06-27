@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Sprites Checklist</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --bg2: #eef4ff;
+      --panel: rgba(255, 255, 255, 0.82);
+      --panel-strong: rgba(255, 255, 255, 0.95);
+      --line: rgba(98, 124, 176, 0.16);
+      --text: #162033;
+      --muted: #65748c;
+      --accent: #3f86ff;
+      --accent2: #62d6c4;
+      --gold: #4b79ff;
+      --shadow: 0 18px 50px rgba(30, 49, 88, 0.1);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --max: 1320px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(98, 214, 196, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(63, 134, 255, 0.16), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f4f8ff 48%, #eef4ff 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(43,69,116,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(43,69,116,0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: 0.22;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.72), transparent 88%);
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(50px);
+      pointer-events: none;
+      opacity: 0.25;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      width: 320px;
+      height: 320px;
+      left: -60px;
+      top: -60px;
+      background: rgba(98, 214, 196, 0.2);
+    }
+
+    .orb.two {
+      width: 420px;
+      height: 420px;
+      right: -120px;
+      top: 150px;
+      background: rgba(63, 134, 255, 0.12);
+      animation-delay: -6s;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(24px, 30px, 0) scale(1.08); }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 249, 255, 0.9));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-main {
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -110px;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(98, 214, 196, 0.18), transparent 64%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(63, 134, 255, 0.16);
+      background: rgba(63, 134, 255, 0.08);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 5.6vw, 4.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+    }
+
+    .subtitle {
+      margin: 18px 0 0;
+      max-width: 66ch;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1.02rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(98,124,176,0.14);
+    }
+
+    .stat .label {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .stat .value {
+      font-size: 0.98rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-side {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .note {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(98,124,176,0.14);
+    }
+
+    .note h2 {
+      margin: 0 0 10px;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.94rem;
+    }
+
+    .toolbar {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      flex: 1 1 420px;
+    }
+
+    .summary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ffffff, #f6f9ff);
+      border: 1px solid rgba(98,124,176,0.14);
+      box-shadow: 0 8px 18px rgba(30,49,88,0.06);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      animation: pulse-soft 7s ease-in-out infinite;
+    }
+
+    .summary-pill strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .mini-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1 1 260px;
+    }
+
+    .bar {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(98,124,176,0.08);
+      overflow: hidden;
+      flex: 1;
+      min-width: 160px;
+      border: 1px solid rgba(98,124,176,0.12);
+    }
+
+    .bar > span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 24px rgba(63, 134, 255, 0.22);
+      transition: width 240ms ease;
+    }
+
+    .progress-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      min-width: 102px;
+      text-align: right;
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1px); }
+    }
+
+    .small-btn {
+      appearance: none;
+      border: 1px solid rgba(63,134,255,0.16);
+      background: linear-gradient(180deg, #ffffff, #f4f8ff);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(30, 49, 88, 0.08);
+    }
+
+    .small-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(63, 134, 255, 0.34);
+      box-shadow: 0 10px 22px rgba(30, 49, 88, 0.12);
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .legend-card {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff, #f7faff);
+      border: 1px solid rgba(98,124,176,0.12);
+      box-shadow: 0 8px 18px rgba(30,49,88,0.06);
+    }
+
+    .legend-card h3 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .legend-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.9rem;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .sprite-card {
+      overflow: hidden;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(98,124,176,0.14);
+      animation: rise 420ms ease both;
+      position: relative;
+    }
+
+    .sprite-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(113, 247, 208, 0.95), rgba(255, 111, 97, 0.95));
+      opacity: 0.65;
+    }
+
+    .sprite-top {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .sprite-image {
+      background: linear-gradient(180deg, rgba(98, 124, 176, 0.06), rgba(98, 124, 176, 0.02));
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid rgba(98,124,176,0.12);
+    }
+
+    .sprite-image img {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 14px 34px rgba(30, 49, 88, 0.12);
+    }
+
+    .sprite-body {
+      padding: 16px 16px 14px;
+      min-width: 0;
+    }
+
+    .sprite-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .sprite-title h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .rarity {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border: 1px solid rgba(98,124,176,0.12);
+      background: rgba(255,255,255,0.92);
+    }
+
+    .rarity.rare { color: #8bc4ff; }
+    .rarity.epic { color: #c2a0ff; }
+    .rarity.legendary { color: #ffb85f; }
+    .rarity.mythic { color: #ffd86a; }
+
+    .meta {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(98,124,176,0.06);
+      border: 1px solid rgba(98,124,176,0.1);
+      color: var(--text);
+      font-size: 0.8rem;
+    }
+
+    .variants {
+      padding: 0 16px 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .variant {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ffffff, #f7faff);
+      border: 1px solid rgba(98,124,176,0.12);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 8px 18px rgba(30, 49, 88, 0.06);
+      position: relative;
+      overflow: hidden;
+      animation: drift-card 9s ease-in-out infinite;
+    }
+
+    .variant:hover {
+      transform: translateY(-1px);
+      border-color: rgba(63, 134, 255, 0.24);
+      box-shadow: 0 10px 20px rgba(30, 49, 88, 0.1);
+    }
+
+    .variant::after {
+      content: "";
+      position: absolute;
+      inset: auto -25% -45% auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(63,134,255,0.12), transparent 68%);
+      transform: translate3d(0, 0, 0);
+      pointer-events: none;
+    }
+
+    .variant input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      flex: 0 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant span {
+      font-size: 0.94rem;
+      color: var(--text);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .variant .variant-state {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(63,134,255,0.08);
+      border: 1px solid rgba(63,134,255,0.14);
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      transition: transform 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .variant .variant-x {
+      display: none;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .variant.is-checked {
+      border-color: rgba(235, 75, 75, 0.22);
+      background: linear-gradient(180deg, #fff8f8, #fff1f1);
+      animation: checked-pop 260ms ease;
+    }
+
+    .variant.is-checked .variant-state {
+      background: rgba(235, 75, 75, 0.1);
+      border-color: rgba(235, 75, 75, 0.22);
+      color: #e34949;
+      transform: scale(1.02);
+    }
+
+    .variant.is-checked .variant-x {
+      display: inline-block;
+    }
+
+    .variant.is-checked span.variant-name {
+      color: #b83333;
+    }
+
+    .variant.is-checked .variant-state::before {
+      content: "!";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #e34949;
+      color: #fff;
+      font-size: 0.75rem;
+      margin-right: 2px;
+    }
+
+    @keyframes drift-card {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1px); }
+    }
+
+    @keyframes checked-pop {
+      0% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    .toast {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 50;
+      min-width: 240px;
+      max-width: min(320px, calc(100vw - 36px));
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(98,124,176,0.16);
+      box-shadow: 0 18px 42px rgba(30,49,88,0.14);
+      color: var(--text);
+      transform: translateY(-14px) translateX(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0) translateX(0);
+    }
+
+    .toast .line1 {
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .toast .line2 {
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .status {
+      margin-top: 12px;
+      color: var(--accent);
+      font-size: 0.94rem;
+      min-height: 22px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .hidden-link {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1080px) {
+      .hero { grid-template-columns: 1fr; }
+      .checklist { grid-template-columns: 1fr; }
+      .legend { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .shell { width: min(var(--max), calc(100% - 16px)); padding-top: 12px; }
+      .hero-main, .hero-side, .section { padding: 18px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sprite-top { grid-template-columns: 1fr; }
+      .sprite-image { border-right: 0; border-bottom: 1px solid rgba(98,124,176,0.12); }
+      .sprite-image img { width: 100%; max-width: 180px; height: auto; aspect-ratio: 1 / 1; }
+      .sprite-title { flex-direction: column; align-items: flex-start; }
+      .progress-text { min-width: 0; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">Sprite checklist</div>
+        <h1>All Sprites in Fortnite Chapter 7 Season 3</h1>
+
+        <div class="toolbar">
+          <div class="summary-row">
+            <div class="summary-pill">Available: <strong id="availableCount">0</strong></div>
+            <div class="summary-pill">Left: <strong id="leftCount">0</strong></div>
+          </div>
+          <div class="mini-progress">
+            <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+            <div class="progress-text" id="progressText">0%</div>
+          </div>
+          <button class="small-btn" id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <div class="section-head">
+        <div>
+          <h2>Checklist</h2>
+          <span>Tap any checkbox to update the collection state.</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-card">
+          <h3>Special variants</h3>
+          <p>Gold gives extra XP from eliminations. Gummy gives 10% more Sprite Dust. Galaxy gives 20% more ammo from ammo boxes.</p>
+        </div>
+      </div>
+      <div class="checklist" id="checklist"></div>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "sprites-checklist-progress-v2";
+
+    const sprites = [
+      {
+        name: "Water Sprite",
+        slug: "water-sprite",
+        rarity: "Rare",
+        ability: "Replenishes your and your teammates' shield when in water.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/60/Fortnite_water_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Earth Sprite",
+        slug: "earth-sprite",
+        rarity: "Rare",
+        ability: "Increases your chance of finding additional rare items in chests.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/0/07/Fortnite_earth_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Fire Sprite",
+        slug: "fire-sprite",
+        rarity: "Rare",
+        ability: "Spawns fire when you deal enough damage to an opponent.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/d/d3/Fortnite_fire_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Fishy Sprite",
+        slug: "fishy-sprite",
+        rarity: "Rare",
+        ability: "Makes you swim faster and gives you a short speed boost after you take damage.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/b/b7/Fortnite_fishy_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Duck Sprite",
+        slug: "duck-sprite",
+        rarity: "Epic",
+        ability: "Replenishes your shields when emoting or jamming.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/f1/Fortnite_duck_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Ghost Sprite",
+        slug: "ghost-sprite",
+        rarity: "Epic",
+        ability: "When reloading, you become cloaked for a short duration.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/4/40/Fortnite_ghost_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Demon Sprite",
+        slug: "demon-sprite",
+        rarity: "Epic",
+        ability: "When you defeat an opponent, you siphon health and shield from them.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/3c/Fortnite_demon_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "King Sprite",
+        slug: "king-sprite",
+        rarity: "Epic",
+        ability: "Increases your pickaxe's damage.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/31/Fortnite_king_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Aura Sprite",
+        slug: "aura-sprite",
+        rarity: "Epic",
+        ability: "Grants you a Shock Rock charge after dealing a certain amount of damage.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/6/63/Fofrtnite_aura_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Striker Sprite",
+        slug: "striker-sprite",
+        rarity: "Epic",
+        ability: "Gives you a brief Overdrive buff when you mantle, hurdle, or wall scramble.",
+        found: "Found in chests or by scoring a goal at the Soccer Pitch POI",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/2/2b/Fortnite_striker_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Punk Sprite",
+        slug: "punk-sprite",
+        rarity: "Legendary",
+        ability: "When mastered, randomly gives you infinite ammo.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/3/33/Fortnite_punk_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Dream Sprite",
+        slug: "dream-sprite",
+        rarity: "Legendary",
+        ability: "Each time you level it up, you get a random item. At level 5, it explodes and drops legendary loot.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/7/73/Fortnite_dream_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Boss Sprite",
+        slug: "boss-sprite",
+        rarity: "Legendary",
+        ability: "Increases your max health and shield.",
+        found: "Found by killing bosses",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/a/ab/Fortnite_boss_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Zero Point Sprite",
+        slug: "zero-point-sprite",
+        rarity: "Mythic",
+        ability: "Puts a Shield Bubble Jr. around you when you use a healing item.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/f0/Fortnite_zero_point_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "Grim Reaper Sprite",
+        slug: "grim-reaper-sprite",
+        rarity: "Mythic",
+        ability: "Players who damage you while equipped become marked for a short duration.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/8/82/Fortnite_grim_reaper_sprite.png",
+        variants: ["Sprite", "Gold Sprite", "Gummy Sprite", "Galaxy Sprite"],
+      },
+      {
+        name: "The Burnt Peanut Sprite",
+        slug: "burnt-peanut-sprite",
+        rarity: "Mythic",
+        ability: "Grants you a small chance of getting random, rare item drops from eliminations.",
+        found: "Found in chests",
+        image: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/fortnite/f/f3/Fortnite_burntpeanut_sprite.png",
+        variants: ["Sprite"],
+      },
+    ];
+
+    const checklistEl = document.getElementById("checklist");
+    const progressBarEl = document.getElementById("progressBar");
+    const progressTextEl = document.getElementById("progressText");
+    const availableCountEl = document.getElementById("availableCount");
+    const leftCountEl = document.getElementById("leftCount");
+    const toastEl = document.getElementById("toast");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function sanitizeFileName(value) {
+      return String(value || "sprite")
+        .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "_")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 120) || "sprite";
+    }
+
+    function storageKey(slug, variant) {
+      return `${STORAGE_KEY}:${slug}:${variant}`;
+    }
+
+    function getState(slug, variant) {
+      return localStorage.getItem(storageKey(slug, variant)) === "1";
+    }
+
+    function setState(slug, variant, value) {
+      localStorage.setItem(storageKey(slug, variant), value ? "1" : "0");
+    }
+
+    function countTasks() {
+      return sprites.reduce((sum, sprite) => sum + sprite.variants.length, 0);
+    }
+
+    function countCompleted() {
+      let count = 0;
+      for (const sprite of sprites) {
+        for (const variant of sprite.variants) {
+          if (getState(sprite.slug, variant)) count++;
+        }
+      }
+      return count;
+    }
+
+    function showToast(message, leftCount) {
+      toastEl.innerHTML = `
+        <div class="line1">${escapeHtml(message)}</div>
+        <div class="line2">Left: ${escapeHtml(String(leftCount))}</div>
+      `;
+      toastEl.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 1800);
+    }
+
+    function updateProgress() {
+      const total = countTasks();
+      const done = countCompleted();
+      const percent = total ? Math.round((done / total) * 100) : 0;
+      const left = Math.max(total - done, 0);
+      availableCountEl.textContent = String(total);
+      leftCountEl.textContent = String(left);
+      progressBarEl.style.width = `${percent}%`;
+      progressTextEl.textContent = `${percent}%`;
+    }
+
+    function rarityClass(value) {
+      const lower = value.toLowerCase();
+      if (lower.includes("rare")) return "rare";
+      if (lower.includes("epic")) return "epic";
+      if (lower.includes("legendary")) return "legendary";
+      return "mythic";
+    }
+
+    function render() {
+      checklistEl.innerHTML = "";
+      sprites.forEach((sprite, index) => {
+        const article = document.createElement("article");
+        article.className = "sprite-card";
+        article.style.animationDelay = `${Math.min(index * 28, 280)}ms`;
+
+        const variantMarkup = sprite.variants.map((variant) => {
+          const checked = getState(sprite.slug, variant) ? "checked" : "";
+          return `
+            <label class="variant ${checked ? "is-checked" : ""}">
+              <input type="checkbox" data-slug="${escapeHtml(sprite.slug)}" data-variant="${escapeHtml(variant)}" ${checked} />
+              <span class="variant-name">${escapeHtml(variant)}</span>
+              <span class="variant-state"><span class="variant-x">✕</span><span class="variant-text">${checked ? "GOT IT!" : "Get!"}</span></span>
+            </label>
+          `;
+        }).join("");
+
+        article.innerHTML = `
+          <div class="sprite-top">
+            <div class="sprite-image">
+              <img src="${escapeHtml(sprite.image)}" alt="${escapeHtml(sprite.name)}" loading="lazy" />
+            </div>
+            <div class="sprite-body">
+              <div class="sprite-title">
+                <h3>${escapeHtml(sprite.name)}</h3>
+                <span class="rarity ${rarityClass(sprite.rarity)}">${escapeHtml(sprite.rarity)}</span>
+              </div>
+              <div class="meta">${escapeHtml(sprite.ability)}</div>
+              <div class="tags">
+                <span class="tag">${escapeHtml(sprite.found)}</span>
+                <span class="tag">${escapeHtml(sprite.variants.length)} variant${sprite.variants.length === 1 ? "" : "s"}</span>
+              </div>
+            </div>
+          </div>
+          <div class="variants">${variantMarkup}</div>
+        `;
+        checklistEl.appendChild(article);
+      });
+
+      checklistEl.querySelectorAll('input[type="checkbox"]').forEach((box) => {
+        box.addEventListener("change", () => {
+          setState(box.dataset.slug, box.dataset.variant, box.checked);
+          const label = box.closest(".variant");
+          if (label) {
+            label.classList.toggle("is-checked", box.checked);
+            const stateText = label.querySelector(".variant-text");
+            if (stateText) stateText.textContent = box.checked ? "GOT IT!" : "Get!";
+          }
+          const totalLeft = Math.max(countTasks() - countCompleted(), 0);
+          const spriteName = sprites.find((sprite) => sprite.slug === box.dataset.slug)?.name || box.dataset.variant;
+          showToast(`${box.checked ? "Added" : "Removed"} ${box.dataset.variant} for ${spriteName}`, totalLeft);
+          updateProgress();
+        });
+      });
+
+      updateProgress();
+    }
+
+    async function autoDownloadSprites() {
+      const urls = sprites.map((sprite, index) => ({
+        url: sprite.image,
+        fileName: `${String(index + 1).padStart(2, "0")}-${sanitizeFileName(sprite.slug)}.${sprite.image.endsWith(".jpg") ? "jpg" : "png"}`,
+      }));
+
+      let started = 0;
+      for (const item of urls) {
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+        try {
+          const response = await fetch(item.url, { mode: "cors" });
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = objectUrl;
+          link.download = item.fileName;
+          link.rel = "noreferrer";
+          link.className = "hidden-link";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+          started++;
+        } catch {
+          // If the browser blocks access to the image host, skip silently.
+        }
+      }
+    }
+
+    function resetChecklist() {
+      for (const sprite of sprites) {
+        for (const variant of sprite.variants) {
+          localStorage.removeItem(storageKey(sprite.slug, variant));
+        }
+      }
+      render();
+      autoDownloadSprites();
+    }
+
+    resetBtn.addEventListener("click", resetChecklist);
+
+    render();
+    setTimeout(autoDownloadSprites, 350);
+  </script>
+</body>
+</html>
